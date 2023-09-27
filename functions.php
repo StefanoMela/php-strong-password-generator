@@ -1,4 +1,6 @@
 <?php
+
+
 function createPassword($pwd_length)
 {
     $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
@@ -13,7 +15,14 @@ function createPassword($pwd_length)
 if (isset($_GET['pwd_length'])) {
     $pwd_length = $_GET['pwd_length'];
     if (is_numeric($pwd_length)) {
-        $secure_pwd = createPassword($pwd_length);
+
+        session_start();
+        $_SESSION['secure_pwd'] = createPassword($pwd_length);
     };
+
+};
+
+if (isset( $_SESSION['secure_pwd'])){
+    header('Location: ./success.php');
 };
 ?>

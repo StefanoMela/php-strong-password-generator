@@ -30,10 +30,6 @@ include __DIR__ . '/functions.php';
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-
-        <?php if (isset($secure_pwd)) : ?>
-            <h2>La tua password è: <?php echo $secure_pwd ?> </h2>
-        <?php endif ?>
     </div>
 </body>
 
