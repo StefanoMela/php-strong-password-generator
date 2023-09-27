@@ -1,27 +1,9 @@
 <?php
 
 
-function createPassword($pwd_length)
-{
-    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-    $password = '';
+include __DIR__ . '/functions.php';
 
-    for ($i = 0; $i < $pwd_length; $i++) {
-        $password .= $chars[rand(0, strlen($chars))];
-    };
-    return $password;
-};
-
-if (isset($_GET['pwd_length'])) {
-    $pwd_length = $_GET['pwd_length'];
-    if (is_numeric($pwd_length)) {
-        $secure_pwd = createPassword($pwd_length);
-    };
-};
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,13 +20,13 @@ if (isset($_GET['pwd_length'])) {
 <body>
     <div class="container d-flex flex-column align-items-center text-center">
         <div class="title my-5">
-            <h1>Almost Secure PSW Generator</h1>
+            <h1>Almost Secure PWD Generator</h1>
             <h5>Dicci quanto lunga dovrà esser la password e la creeremo per te</h5>
         </div>
         <form method="GET" class="w-50">
             <div class="mb-3">
-                <label for="psw-length" class="form-label">Quanto dovrà essere lunga la tua password ?</label>
-                <input type="number" autofocus max="30" name="pwd_length" class="form-control" id="pwd-length">
+                <label for="pwd_length" class="form-label">Quanto dovrà essere lunga la tua password ?</label>
+                <input type="number" autofocus min="8" max="30" name="pwd_length" class="form-control" id="pwd_length">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
