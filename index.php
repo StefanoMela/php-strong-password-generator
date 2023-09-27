@@ -1,21 +1,21 @@
 <?php
 
 
-
-
-
-$psw_length = $_GET;
-
-function createPassword($psw_length)
+function createPassword($pwd_length)
 {
+    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+    $password = '';
 
-    if (is_numeric($psw_length)) {
+    for ($i = 0; $i < $pwd_length; $i++) {
+        $password .= $chars[rand(0, strlen($chars))];
+    };
+    return $password;
+};
 
-        $possible_chars = array_merge(range('A', 'Z'), range('a', 'z'));
-        $secure_password[] = shuffle($possible_chars);
-
-        var_dump($possible_chars);
-        var_dump($secure_password);
+if (isset($_GET['pwd_length'])) {
+    $pwd_length = $_GET['pwd_length'];
+    if (is_numeric($pwd_length)) {
+        $secure_pwd = createPassword($pwd_length);
     };
 };
 ?>
@@ -43,11 +43,15 @@ function createPassword($psw_length)
         </div>
         <form method="GET" class="w-50">
             <div class="mb-3">
-                <label for="psw-lenght" class="form-label">Quanto dovrà essere lunga la tua password ?</label>
-                <input type="number" autofocus max="30" name="psw_length$psw_length" class="form-control" id="psw-lenght">
+                <label for="psw-length" class="form-label">Quanto dovrà essere lunga la tua password ?</label>
+                <input type="number" autofocus max="30" name="pwd_length" class="form-control" id="pwd-length">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+
+        <?php if (isset($secure_pwd)) : ?>
+            <h2>La tua password è: <?php echo $secure_pwd ?> </h2>
+        <?php endif ?>
     </div>
 </body>
 
